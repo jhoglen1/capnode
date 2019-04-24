@@ -1,0 +1,26 @@
+{
+  "name": "fournode",
+  "version": "1.0.0",
+  "description": "",
+  "main": "config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jhoglen1/capnode.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jhoglen1/capnode/issues"
+  },
+  "homepage": "https://github.com/jhoglen1/capnode#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mongo": "^0.1.0",
+    "mongoose": "^5.5.3",
+    "morgan": "^1.9.1"
+  }
+}
