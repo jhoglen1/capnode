@@ -134,8 +134,7 @@ app.use(function(req, res, next) {
 passport.use(localStrategy);
 passport.use(jwtStrategy);
 
-app.use("/api/user/", userRouter);
-app.use("/api/authorize/", authorizeRouter);
+
 
 const jwtAuth = passport.authenticate("jwt", { session: false });
 
