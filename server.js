@@ -20,6 +20,22 @@ app.use(express.json());
 app.use("/api/user/", userRouter);
 app.use("/api/authorize/", authorizeRouter);
 
+passport.use(localStrategy);
+passport.use(jwtStrategy);
+
+
+
+const jwtAuth = passport.authenticate("jwt", { session: false });
+
+
+app.get("/api/protected/", jwtAuth, (req, res) => {
+  return res.json({
+    data: "rosebud"
+  });
+});
+
+
+
 app.get('/brewery', (req, res) => {
   BrewPost
     .find()
@@ -32,6 +48,7 @@ app.get('/brewery', (req, res) => {
     });
 });
 
+
 app.get('/brewery/:id', (req, res) => {
   BrewPost
     .findById(req.params.id)
@@ -41,6 +58,7 @@ app.get('/brewery/:id', (req, res) => {
       res.status(500).json({ error: 'something went horribly awry' });
     });
 });
+
 
 app.post('/brewery', (req, res) => {
   const requiredFields = ['reviewer','brew', 'content' ];
@@ -52,6 +70,7 @@ app.post('/brewery', (req, res) => {
       return res.status(400).send(message);
     }
   }
+  
 
   BrewPost
     .create({
@@ -69,6 +88,7 @@ app.post('/brewery', (req, res) => {
 });
 
 
+
 app.delete('/brewery/:id', (req, res) => {
   BrewPost
     .findByIdAndRemove(req.params.id)
@@ -80,6 +100,7 @@ app.delete('/brewery/:id', (req, res) => {
       res.status(500).json({ error: 'something went terribly wrong' });
     });
 });
+
 
 
 app.put('/brewery/:id', (req, res) => {
@@ -114,6 +135,8 @@ app.delete('/:id', (req, res) => {
 });
 
 
+
+
 app.use('*', function (req, res) {
   res.status(404).json({ message: 'Not Found' });
 });
@@ -131,19 +154,7 @@ app.use(function(req, res, next) {
 
 //app.use(express.static("public"));
 
-passport.use(localStrategy);
-passport.use(jwtStrategy);
 
-
-
-const jwtAuth = passport.authenticate("jwt", { session: false });
-
-
-app.get("/api/protected", jwtAuth, (req, res) => {
-  return res.json({
-    data: "rosebud"
-  });
-});
 
 app.use("*", (req, res) => {
   return res.status(404).json({ message: "Not Found" });
