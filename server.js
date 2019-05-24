@@ -73,7 +73,7 @@ app.get('/brewery/:id', (req, res) => {
 
 
 app.post('/brewery', (req, res) => {
-  const requiredFields = ['reviewer','brew', 'content' ];
+  const requiredFields = ['User','Date', 'Brew','Brewery','BreweryLocation','Style','Review' ];
   for (let i = 0; i < requiredFields.length; i++) {
     const field = requiredFields[i];
     if (!(field in req.body)) {
@@ -86,15 +86,19 @@ app.post('/brewery', (req, res) => {
 
   BrewPost
     .create({
-     reviewer: req.body.reviewer,
-      brew : req.body.brew,
-      content: req.body.content
+     User: req.body.User,
+     Date: req.body.Date,
+     Brew : req.body.Brew,
+     Brewery: req.body.Brewery,
+     Style: req.body.Style,
+     Review:req.body.Review
      
     })
+    
     .then(brewPost => res.status(201).json(brewPost.serialize()))
     .catch(err => {
       console.error(err);
-      res.status(500).json({ error: 'Something went wrong' });
+      res.status(500).json({ error:'Something went wrong' });
     });
 
 });
@@ -123,7 +127,7 @@ app.put('/brewery/:id', (req, res) => {
   }
 
   const updated = {};
-  const updateableFields = ['review','brew', 'content', ];
+  const updateableFields = ['User','Date', 'Brew','Brewery','BreweryLocation','Style','Review'];
   updateableFields.forEach(field => {
     if (field in req.body) {
       updated[field] = req.body[field];

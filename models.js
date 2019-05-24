@@ -4,9 +4,12 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 const brewPostSchema = mongoose.Schema({
-  reviewer: {type: String},
-  brew: {type: String, required: true},
-  content: {type: String},
+  User: {type: String},
+  Date: {type: String},
+  Brew: {type: String},
+  Brewery: {type: String},
+  Style: {type: String},
+  Review: {type: String}
   
 });
 
@@ -15,9 +18,12 @@ const brewPostSchema = mongoose.Schema({
 brewPostSchema.methods.serialize = function() {
   return {
     id: this._id,
-    reviewer: this.reviewer,
-    content: this.content,
-    brew: this.brew
+    User: this.User,
+    Date: this.Date,
+    Brew: this.Brew,
+    Brewery: this.Brewery,
+    Style: this.Style,
+    Review: this.Review
     
   };
 };

@@ -12,7 +12,7 @@ const jsonParser = bodyPaser.json();
 router.post('/',jsonParser,(req,res)=>{
     const requiredFields = ['username', 'password'];
     const missingfield = requiredFields.find(field => !(field in req.body));
-
+    
     if (missingfield){
         return res.status(422).json({
             code: 422,
@@ -40,7 +40,7 @@ if (nonStringField){
     const nonTrimmedField = explicityTrimmedFields.find(
       field => req.body[field].trim() !== req.body[field]
     );
-  
+    console.log(req.body);
     if (nonTrimmedField) {
       return res.status(422).json({
         code: 422,
