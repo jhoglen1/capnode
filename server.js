@@ -73,7 +73,7 @@ app.get('/brewery/:id', (req, res) => {
 
 
 app.post('/brewery', (req, res) => {
-  const requiredFields = ['User','Date', 'Brew','Brewery','BreweryLocation','Style','Review' ];
+  const requiredFields = ['User','Date', 'Brew','Brewery','Style','Review' ];
   for (let i = 0; i < requiredFields.length; i++) {
     const field = requiredFields[i];
     if (!(field in req.body)) {
@@ -127,7 +127,7 @@ app.put('/brewery/:id', (req, res) => {
   }
 
   const updated = {};
-  const updateableFields = ['User','Date', 'Brew','Brewery','BreweryLocation','Style','Review'];
+  const updateableFields = ['User','Date', 'Brew','Brewery','Style','Review'];
   updateableFields.forEach(field => {
     if (field in req.body) {
       updated[field] = req.body[field];
